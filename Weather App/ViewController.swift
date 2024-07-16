@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var weatherCondition: UILabel!
     @IBOutlet var temperatureView: UILabel!
     @IBOutlet var weatherIconView: UIImageView!
@@ -21,10 +21,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        displaySampleImage()
+//        displaySampleImage()
+        searchBoxView.delegate = self
     }
     
-    private func displaySampleImage(){
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        loadWeather(search: searchBoxView.text)
+        return true
+    }
+    
+    private func displayWeatherImage(){
         
         let customPurple = UIColor(hex: "#8E5F7E")
         
