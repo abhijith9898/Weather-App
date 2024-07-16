@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate {
     @IBOutlet var weatherCondition: UILabel!
     @IBOutlet var temperatureView: UILabel!
     @IBOutlet var weatherIconView: UIImageView!
@@ -15,7 +16,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var searchBoxView: UITextField!
     @IBOutlet var temperatureToggle: UISegmentedControl!
     
+    private let locationManager = CLLocationManager()
     private var weatherResponse: WeatherResponse?
+    
     let weatherIconMap: [Int: String] = [
         1000: "sun.max.fill",                // Clear
         1003: "cloud.sun.fill",              // Partly Cloudy
@@ -70,35 +73,45 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-//        displaySampleImage()
+        // displaySampleImage()
         searchBoxView.delegate = self
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
-        loadWeather(search: searchBoxView.text)
+        if let location = searchBoxView.text, !location.isEmpty {
+            loadWeather(for: location)
+        }
         return true
     }
     
 
     @IBAction func onSearchButtonClick(_ sender: UIButton) {
-        loadWeather(search: searchBoxView.text)
+        if let location = searchBoxView.text, !location.isEmpty {
+            loadWeather(for: location)
+        }
     }
+    
     @IBAction func onLocationButtonClick(_ sender: UIButton) {
+        locationManager.requestLocation()
     }
+    
     @IBAction func onToggleClick(_ sender: UISegmentedControl) {
         print("segment: \(sender.selectedSegmentIndex)")
         updateTemperatureDisplay()
     }
+    
     @IBAction func onClitiesButtonClick(_ sender: UIButton) {
     }
     
-    private func loadWeather(search: String?){
-        guard let search = search else {
+    private func loadWeather(for location: String?){
+        guard let location = location else {
             return
         }
         
-        guard let url = getURL(query:search) else {
+        guard let url = getURL(query:location) else {
             print("Could not get URL")
             return
         }
@@ -204,6 +217,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
         } else {
             weatherIconView.image = UIImage(systemName: "questionmark.circle")
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            loadWeather(for: "\(location.coordinate.latitude),\(location.coordinate.longitude)")
+        }
+    }
+        
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to get user location: \(error)")
     }
     
 }
