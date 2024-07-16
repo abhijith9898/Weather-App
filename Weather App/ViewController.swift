@@ -15,8 +15,57 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var searchBoxView: UITextField!
     @IBOutlet var temperatureToggle: UISegmentedControl!
     
-    
     private var weatherResponse: WeatherResponse?
+    let weatherIconMap: [Int: String] = [
+        1000: "sun.max.fill",                // Clear
+        1003: "cloud.sun.fill",              // Partly Cloudy
+        1006: "cloud.fill",                  // Cloudy
+        1009: "smoke.fill",                  // Overcast
+        1030: "cloud.fog.fill",              // Mist
+        1063: "cloud.drizzle.fill",          // Patchy rain possible
+        1066: "cloud.snow.fill",             // Patchy snow possible
+        1069: "cloud.sleet.fill",            // Patchy sleet possible
+        1072: "cloud.hail.fill",             // Patchy freezing drizzle possible
+        1087: "cloud.bolt.fill",             // Thundery outbreaks possible
+        1114: "cloud.snow.fill",             // Blowing snow
+        1117: "cloud.snow.fill",             // Blizzard
+        1135: "cloud.fog.fill",              // Fog
+        1147: "cloud.fog.fill",              // Freezing fog
+        1150: "cloud.drizzle.fill",          // Patchy light drizzle
+        1153: "cloud.drizzle.fill",          // Light drizzle
+        1168: "cloud.hail.fill",             // Freezing drizzle
+        1171: "cloud.hail.fill",             // Heavy freezing drizzle
+        1180: "cloud.drizzle.fill",          // Patchy light rain
+        1183: "cloud.rain.fill",             // Light rain
+        1186: "cloud.rain.fill",             // Moderate rain at times
+        1189: "cloud.rain.fill",             // Moderate rain
+        1192: "cloud.heavyrain.fill",        // Heavy rain at times
+        1195: "cloud.heavyrain.fill",        // Heavy rain
+        1198: "cloud.hail.fill",             // Light freezing rain
+        1201: "cloud.hail.fill",             // Moderate or heavy freezing rain
+        1204: "cloud.sleet.fill",            // Light sleet
+        1207: "cloud.sleet.fill",            // Moderate or heavy sleet
+        1210: "cloud.snow.fill",             // Patchy light snow
+        1213: "cloud.snow.fill",             // Light snow
+        1216: "cloud.snow.fill",             // Patchy moderate snow
+        1219: "cloud.snow.fill",             // Moderate snow
+        1222: "cloud.snow.fill",             // Patchy heavy snow
+        1225: "cloud.snow.fill",             // Heavy snow
+        1237: "cloud.hail.fill",             // Ice pellets
+        1240: "cloud.drizzle.fill",          // Light rain shower
+        1243: "cloud.heavyrain.fill",        // Moderate or heavy rain shower
+        1246: "cloud.heavyrain.fill",        // Torrential rain shower
+        1249: "cloud.sleet.fill",            // Light sleet showers
+        1252: "cloud.sleet.fill",            // Moderate or heavy sleet showers
+        1255: "cloud.snow.fill",             // Light snow showers
+        1258: "cloud.snow.fill",             // Moderate or heavy snow showers
+        1261: "cloud.hail.fill",             // Light showers of ice pellets
+        1264: "cloud.hail.fill",             // Moderate or heavy showers of ice pellets
+        1273: "cloud.bolt.rain.fill",        // Patchy light rain with thunder
+        1276: "cloud.bolt.rain.fill",        // Moderate or heavy rain with thunder
+        1279: "cloud.bolt.snow.fill",        // Patchy light snow with thunder
+        1282: "cloud.bolt.snow.fill"         // Moderate or heavy snow with thunder
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,17 +80,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    private func displayWeatherImage(){
-        
-        let customPurple = UIColor(hex: "#8E5F7E")
-        
-        let config = UIImage.SymbolConfiguration(paletteColors: [
-            customPurple, .systemYellow
-        ])
-        
-        weatherIconView.preferredSymbolConfiguration = config
-        weatherIconView.image = UIImage(systemName: "cloud.sun.fill")
-    }
 
     @IBAction func onSearchButtonClick(_ sender: UIButton) {
         loadWeather(search: searchBoxView.text)
@@ -90,6 +128,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     self.currentLocationView.text = "\(weatherResponse.location.name)"
                     self.weatherCondition.text = "\(weatherResponse.current.condition.text)"
                     self.updateTemperatureDisplay()
+                    self.displayWeatherImage(code:weatherResponse.current.condition.code)
                 }
                 
             }
@@ -143,7 +182,29 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             
             temperatureView.text = temperature
+    }
+    
+    private func displayWeatherImage(code:Int){
+        
+        let defaultColor = UIColor(hex: "#8E5F7E")
+        let config:UIImage.SymbolConfiguration
+        if(code == 1000){
+            config = UIImage.SymbolConfiguration(paletteColors: [
+                .systemYellow
+            ])
+        } else {
+            config = UIImage.SymbolConfiguration(paletteColors: [
+                defaultColor, .systemYellow
+            ])
         }
+        
+        if let icon = weatherIconMap[code] {
+            weatherIconView.preferredSymbolConfiguration = config
+            weatherIconView.image = UIImage(systemName: icon)
+        } else {
+            weatherIconView.image = UIImage(systemName: "questionmark.circle")
+        }
+    }
     
 }
 
