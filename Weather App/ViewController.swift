@@ -82,11 +82,10 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        // displaySampleImage()
         searchBoxView.delegate = self
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        UserDefaults.standard.set(true, forKey: "isCelsius")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -115,7 +114,6 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
     }
     
     @IBAction func onClitiesButtonClick(_ sender: UIButton) {
-//        performSegue(withIdentifier: "goToCitiesList", sender: self)
     }
     
     private func loadWeather(for location: String?){
@@ -200,10 +198,10 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
             
             let temperature: String
             if temperatureToggle.selectedSegmentIndex == 0 {
-                // Celsius
+                
                 temperature = "\(weatherResponse.current.temp_c) °C"
             } else {
-                // Fahrenheit
+               
                 temperature = "\(weatherResponse.current.temp_f) °F"
             }
             
