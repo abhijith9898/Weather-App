@@ -111,9 +111,11 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
     @IBAction func onToggleClick(_ sender: UISegmentedControl) {
         print("segment: \(sender.selectedSegmentIndex)")
         updateTemperatureDisplay()
+        UserDefaults.standard.set(sender.selectedSegmentIndex == 0, forKey: "isCelsius")
     }
     
     @IBAction func onClitiesButtonClick(_ sender: UIButton) {
+//        performSegue(withIdentifier: "goToCitiesList", sender: self)
     }
     
     private func loadWeather(for location: String?){
@@ -152,6 +154,7 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
                     self.weatherCondition.text = "\(weatherResponse.current.condition.text)"
                     self.updateTemperatureDisplay()
                     self.displayWeatherImage(code:weatherResponse.current.condition.code)
+                    self.addCityWeather(weatherResponse)
                 }
                 
             }
@@ -227,6 +230,18 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
         } else {
             weatherIconView.image = UIImage(systemName: "questionmark.circle")
         }
+    }
+    
+    private func addCityWeather(_ weatherResponse: WeatherResponse) {
+        
+            let cityWeather = CityWeather(
+                cityName: weatherResponse.location.name,
+                temperatureC: weatherResponse.current.temp_c,
+                temperatureF: weatherResponse.current.temp_f,
+                conditionCode: weatherResponse.current.condition.code,
+                conditionIcon: weatherIconMap[weatherResponse.current.condition.code] ?? "questionmark.circle"
+            )
+            WeatherDataModel.shared.citiesWeather.append(cityWeather)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

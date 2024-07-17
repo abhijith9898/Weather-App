@@ -7,27 +7,58 @@
 
 import UIKit
 
-class CitiesViewController: UIViewController {
+class CitiesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet var citiesTableView: UITableView!
+   
+    @IBOutlet var tableView: UITableView!
     
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        tableView.register(UINib(nibName: "TableCustomCell", bundle: nil), forCellReuseIdentifier: "tableViewCell")
+        tableView.dataSource = self
+        tableView.delegate = self
 
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return WeatherDataModel.shared.citiesWeather.count
     }
-    */
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as? TableCustomCell else {
+                   return UITableViewCell()
+               }
+        let cityWeather = WeatherDataModel.shared.citiesWeather[indexPath.row]
+                
+        let isCelsius = UserDefaults.standard.bool(forKey: "isCelsius")
+        let temperature = isCelsius ? "\(cityWeather.temperatureC) °C" : "\(cityWeather.temperatureF) °F"
+        let symbolName = cityWeather.conditionIcon
+                
+        cell.cityNameLabel?.text = "\(cityWeather.cityName)"
+        cell.temperatureLabel?.text = "\(temperature)"
+        
+        let defaultColor = UIColor(hex: "#8E5F7E")
+        let config:UIImage.SymbolConfiguration
+        if(cityWeather.conditionCode == 1000){
+            config = UIImage.SymbolConfiguration(paletteColors: [
+                .systemYellow
+            ])
+        } else {
+            config = UIImage.SymbolConfiguration(paletteColors: [
+                defaultColor, .systemYellow
+            ])
+        }
+        
+            cell.imageView?.preferredSymbolConfiguration = config
+            cell.imageView?.image = UIImage(systemName: symbolName)
 
+                
+        return cell
+    }
+  
+    
+
+   
 }

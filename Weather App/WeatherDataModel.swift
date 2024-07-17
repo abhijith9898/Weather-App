@@ -12,6 +12,7 @@ struct CityWeather {
     let temperatureC: Float
     let temperatureF: Float
     let conditionCode: Int
+    let conditionIcon: String
 }
 
 class WeatherDataModel {
