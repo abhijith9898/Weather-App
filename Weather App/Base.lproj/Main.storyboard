@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zfR-jC-Ciz">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="vecteezy_beautiful-pink-mountain-silhouette-landscape-with-fog-and_7162562" translatesAutoresizingMaskIntoConstraints="NO" id="ycF-qB-dTa">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <rect key="frame" x="0.0" y="44" width="393" height="764"/>
                                 <color key="tintColor" red="0.27943198793402058" green="0.22111374177518187" blue="0.26727219906315425" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Location" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2H5-UU-p18">
@@ -26,7 +27,7 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nzv-AB-tZP">
-                                <rect key="frame" x="333" y="86" width="52" height="35"/>
+                                <rect key="frame" x="333" y="130" width="52" height="35"/>
                                 <color key="tintColor" systemColor="systemPurpleColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
@@ -35,7 +36,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wdO-xL-BwE">
-                                <rect key="frame" x="10" y="86" width="50" height="35"/>
+                                <rect key="frame" x="10" y="130" width="50" height="35"/>
                                 <color key="tintColor" systemColor="systemPurpleColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="location.fill" catalog="system"/>
@@ -66,6 +67,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Cities"/>
                                 <connections>
                                     <action selector="onClitiesButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Dg-JK-w6p"/>
+                                    <segue destination="gsi-6F-2Sf" kind="show" identifier="goToCitiesList" id="pnW-gu-bZW"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="weather condition" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9GZ-p1-edM">
@@ -127,6 +129,7 @@
                             <constraint firstItem="Qv3-Pq-tZ7" firstAttribute="top" secondItem="1zq-8k-rdd" secondAttribute="bottom" constant="13.333333333333371" id="xSa-IK-xXJ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Y98-sy-1th"/>
                     <connections>
                         <outlet property="currentLocationView" destination="nmd-5L-bkw" id="voo-er-OtL"/>
                         <outlet property="searchBoxView" destination="2H5-UU-p18" id="PMR-QQ-0VL"/>
@@ -138,14 +141,123 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1057.2519083969464" y="-34.507042253521128"/>
+        </scene>
+        <!--Cities-->
+        <scene sceneID="X1G-vE-N73">
+            <objects>
+                <viewController id="gsi-6F-2Sf" customClass="CitiesViewController" customModule="Weather_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MLe-A5-wGv">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vecteezy_beautiful-pink-mountain-silhouette-landscape-with-fog-and_7162562" translatesAutoresizingMaskIntoConstraints="NO" id="Zfh-Bc-hxB">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            </imageView>
+                            <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Exf-OH-Xf7">
+                                <rect key="frame" x="0.0" y="103" width="393" height="703"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" name="AccentColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="93" id="w0W-AZ-5Ej">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="93"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w0W-AZ-5Ej" id="HKs-Hp-zMx">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="93"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="moF-9t-zS0">
+                                                    <rect key="frame" x="4" y="6" width="106" height="81"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="106" id="9c9-KD-uga"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCg-HY-hv7">
+                                                    <rect key="frame" x="286" y="5" width="102" height="83"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="102" id="Xzb-6g-T0a"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HxE-ki-Srq">
+                                                    <rect key="frame" x="145" y="17" width="123" height="62"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="HxE-ki-Srq" secondAttribute="bottom" constant="3" id="5er-uU-Yfc"/>
+                                                <constraint firstItem="moF-9t-zS0" firstAttribute="top" secondItem="HKs-Hp-zMx" secondAttribute="top" constant="6" id="82u-26-ZMD"/>
+                                                <constraint firstItem="moF-9t-zS0" firstAttribute="leading" secondItem="HKs-Hp-zMx" secondAttribute="leading" constant="4" id="AaB-dS-GTR"/>
+                                                <constraint firstAttribute="bottom" secondItem="XCg-HY-hv7" secondAttribute="bottom" constant="5" id="DfN-BA-lop"/>
+                                                <constraint firstAttribute="trailing" secondItem="XCg-HY-hv7" secondAttribute="trailing" constant="5" id="HQN-9U-Xbc"/>
+                                                <constraint firstItem="XCg-HY-hv7" firstAttribute="top" secondItem="HKs-Hp-zMx" secondAttribute="top" constant="5" id="Tj1-wr-n0z"/>
+                                                <constraint firstItem="HxE-ki-Srq" firstAttribute="top" secondItem="HKs-Hp-zMx" secondAttribute="topMargin" constant="6" id="Ubr-qI-pXn"/>
+                                                <constraint firstItem="HxE-ki-Srq" firstAttribute="leading" secondItem="moF-9t-zS0" secondAttribute="trailing" constant="35" id="eLM-Fh-zuT"/>
+                                                <constraint firstItem="XCg-HY-hv7" firstAttribute="leading" secondItem="HxE-ki-Srq" secondAttribute="trailing" constant="18" id="eQZ-hg-Aox"/>
+                                                <constraint firstAttribute="bottom" secondItem="moF-9t-zS0" secondAttribute="bottom" constant="6" id="qoH-al-Lpk"/>
+                                                <constraint firstAttribute="trailing" secondItem="XCg-HY-hv7" secondAttribute="trailing" constant="5" id="up5-tU-ar2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="UB0-IP-SU5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Exf-OH-Xf7" firstAttribute="leading" secondItem="Zfh-Bc-hxB" secondAttribute="leading" id="7rE-iq-Ne2"/>
+                            <constraint firstItem="Zfh-Bc-hxB" firstAttribute="centerY" secondItem="MLe-A5-wGv" secondAttribute="centerY" id="8CE-oV-TaW"/>
+                            <constraint firstItem="Exf-OH-Xf7" firstAttribute="top" secondItem="UB0-IP-SU5" secondAttribute="top" id="BqQ-Xw-Vb3"/>
+                            <constraint firstItem="Zfh-Bc-hxB" firstAttribute="centerX" secondItem="MLe-A5-wGv" secondAttribute="centerX" id="aXF-ve-qNj"/>
+                            <constraint firstItem="Zfh-Bc-hxB" firstAttribute="leading" secondItem="UB0-IP-SU5" secondAttribute="leading" id="fdx-Qf-bcS"/>
+                            <constraint firstItem="UB0-IP-SU5" firstAttribute="bottom" secondItem="Zfh-Bc-hxB" secondAttribute="bottom" constant="-34" id="haK-f2-VSi"/>
+                            <constraint firstItem="UB0-IP-SU5" firstAttribute="bottom" secondItem="Exf-OH-Xf7" secondAttribute="bottom" constant="12" id="sV1-wg-XCJ"/>
+                            <constraint firstItem="Exf-OH-Xf7" firstAttribute="trailing" secondItem="Zfh-Bc-hxB" secondAttribute="trailing" id="sWD-wC-dDe"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Cities" id="s9Y-Fj-tSZ"/>
+                    <connections>
+                        <outlet property="citiesTableView" destination="Exf-OH-Xf7" id="vF4-Qv-i78"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CBW-AX-YHb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1785.4961832061067" y="-35.211267605633807"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="IeU-lC-vUI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zfR-jC-Ciz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FaD-Mc-0OG">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Nkk-Xl-e0g"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wm8-2d-w6v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="130.53435114503816" y="-34.507042253521128"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.28627450980000002" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
     <resources>
         <image name="cloud" catalog="system" width="128" height="87"/>
         <image name="location.fill" catalog="system" width="128" height="119"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="vecteezy_beautiful-pink-mountain-silhouette-landscape-with-fog-and_7162562" width="3468" height="2400"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -70,6 +70,16 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
         1282: "cloud.bolt.snow.fill"         // Moderate or heavy snow with thunder
     ]
     
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        }
+        
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
