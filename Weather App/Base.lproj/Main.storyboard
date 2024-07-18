@@ -166,10 +166,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="124"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="moF-9t-zS0">
-                                                    <rect key="frame" x="4" y="6" width="106" height="112"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="moF-9t-zS0">
+                                                    <rect key="frame" x="4" y="6" width="120" height="112"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="106" id="9c9-KD-uga"/>
+                                                        <constraint firstAttribute="width" constant="120" id="H9d-Ln-m7O"/>
+                                                        <constraint firstAttribute="height" constant="112" id="T7s-zM-wni"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCg-HY-hv7">
@@ -177,13 +178,13 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="102" id="Xzb-6g-T0a"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HxE-ki-Srq">
                                                     <rect key="frame" x="145" y="17" width="123" height="93"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -197,7 +198,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="XCg-HY-hv7" secondAttribute="trailing" constant="5" id="HQN-9U-Xbc"/>
                                                 <constraint firstItem="XCg-HY-hv7" firstAttribute="top" secondItem="HKs-Hp-zMx" secondAttribute="top" constant="5" id="Tj1-wr-n0z"/>
                                                 <constraint firstItem="HxE-ki-Srq" firstAttribute="top" secondItem="HKs-Hp-zMx" secondAttribute="topMargin" constant="6" id="Ubr-qI-pXn"/>
-                                                <constraint firstItem="HxE-ki-Srq" firstAttribute="leading" secondItem="moF-9t-zS0" secondAttribute="trailing" constant="35" id="eLM-Fh-zuT"/>
+                                                <constraint firstItem="HxE-ki-Srq" firstAttribute="leading" secondItem="moF-9t-zS0" secondAttribute="trailing" constant="21" id="eLM-Fh-zuT"/>
                                                 <constraint firstItem="XCg-HY-hv7" firstAttribute="leading" secondItem="HxE-ki-Srq" secondAttribute="trailing" constant="18" id="eQZ-hg-Aox"/>
                                                 <constraint firstAttribute="bottom" secondItem="moF-9t-zS0" secondAttribute="bottom" constant="6" id="qoH-al-Lpk"/>
                                                 <constraint firstAttribute="trailing" secondItem="XCg-HY-hv7" secondAttribute="trailing" constant="5" id="up5-tU-ar2"/>
@@ -207,6 +208,7 @@
                                         <connections>
                                             <outlet property="cityNameLabel" destination="HxE-ki-Srq" id="yPE-8b-S0L"/>
                                             <outlet property="temperatureLabel" destination="XCg-HY-hv7" id="fvL-6c-vYo"/>
+                                            <outlet property="weatherImageView" destination="moF-9t-zS0" id="CgO-Ej-ZTN"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

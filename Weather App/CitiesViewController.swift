@@ -15,7 +15,6 @@ class CitiesViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tableView.register(UINib(nibName: "TableCustomCell", bundle: nil), forCellReuseIdentifier: "tableViewCell")
         tableView.dataSource = self
         tableView.delegate = self
 

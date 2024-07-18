@@ -84,7 +84,7 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
         super.viewDidLoad()
         searchBoxView.delegate = self
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
+//        locationManager.requestWhenInUseAuthorization()
         UserDefaults.standard.set(true, forKey: "isCelsius")
     }
     
@@ -104,7 +104,16 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
     }
     
     @IBAction func onLocationButtonClick(_ sender: UIButton) {
-        locationManager.requestLocation()
+        
+        let authorizationStatus = CLLocationManager.authorizationStatus()
+                if authorizationStatus == .notDetermined {
+                    locationManager.requestWhenInUseAuthorization()
+                } else if authorizationStatus == .authorizedWhenInUse || authorizationStatus == .authorizedAlways {
+                    locationManager.requestLocation()
+                } else {
+                    
+                    print("Location permission not allowed")
+                }
     }
     
     @IBAction func onToggleClick(_ sender: UISegmentedControl) {
@@ -191,6 +200,7 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
         return weather
     }
     
+    
     private func updateTemperatureDisplay() {
             guard let weatherResponse = weatherResponse else {
                 return
@@ -241,6 +251,17 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
             )
             WeatherDataModel.shared.citiesWeather.append(cityWeather)
     }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+            switch status {
+            case .authorizedWhenInUse, .authorizedAlways:
+                locationManager.requestLocation()
+            case .denied, .restricted:
+                print("Location permission denied")
+            default:
+                break
+            }
+        }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
